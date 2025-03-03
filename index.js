@@ -133,6 +133,6 @@ app.get("/", (req, res) => {
 
 
 
-
+// dinci.m i chatgpt
 
 client.login(process.env.token)
