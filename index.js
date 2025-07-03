@@ -112,6 +112,10 @@ client.on('interactionCreate', async interaction => {
 
 // Učitavanje quick.db modula
 
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity('.help | snagapiksela.net', { type: 'PLAYING' });
+});
 
 
 
