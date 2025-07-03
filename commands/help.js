@@ -25,6 +25,11 @@ module.exports = {
                 \`.avatar [@user]\` - Get the avatar of a user.
                 \`.quote\` - Get a random inspirational quote.
                 \`.say <message>\` - Make the bot say something.
+                \`.air <@user> \` - Andrew Tate motivation.
+                \`.coinflip\` - Flip a coin.
+                \`.embedsay [title] [description]\` - Make the bot say an embed message.
+                \`.button\` - Press the buttons as much as possible.
+                \`.weather [city]\` - City's weather information.
                 ` },
                 { name: '**Utility Commands**', value: `
                 \`.ping\` - Check the bot's ping to Discord.
@@ -37,9 +42,10 @@ module.exports = {
                 \`.slowmode <time>\` - Set the slowmode for the current channel.
                 \`.time\` - Get the current time.
                 \`.timer <time>\` - Set a timer.
+                \`.serverroles\` - List all roles from the server.
                 ` }
             )
-            .setFooter('Built by SD Studio | SnagaPiksela');
+            .setFooter('Built by SnagaPiksela');
 
         message.channel.send({ embeds: [helpEmbed] });
     }
