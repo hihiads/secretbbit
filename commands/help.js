@@ -1,53 +1,27 @@
 const { MessageEmbed } = require('discord.js');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
-    name: 'help',
-    description: 'Displays all available commands for SD Bot',
-    execute(message, args) {
-        const helpEmbed = new MessageEmbed()
-            .setColor('#FF0000') // Set the color of the embed
-            .setTitle('SD Bot Help Menu')
-            .setDescription('Here’s a list of all the available commands. Use them wisely to manage and have fun in your server!')
-            .addFields(
-                { name: '**Moderation Commands**', value: `
-                \`.ban <@user> [reason]\` - Ban a member from the server.
-                \`.kick <@user> [reason]\` - Kick a member from the server.
-                \`.mute <@user> [time]\` - Temporarily mute a member.
-                \`.unban <@user>\` - Unban a member from the server.
-                \`.warn <@user> [reason]\` - Warn a member for inappropriate behavior.
-                \`.lock\` - Lock the current channel.
-                \`.unlock\` - Unlock the current channel.
-                \`.purge <number>\` - Delete a specified number of messages.
-                \`.vckick <@user>\` - Kick a member from a voice channel.
-                ` },
-                { name: '**Fun Commands**', value: `
-                \`.8ball <question>\` - Ask the magic 8ball a question.
-                \`.avatar [@user]\` - Get the avatar of a user.
-                \`.quote\` - Get a random inspirational quote.
-                \`.say <message>\` - Make the bot say something.
-                \`.air <@user> \` - Andrew Tate motivation.
-                \`.coinflip\` - Flip a coin.
-                \`.embedsay [title] [description]\` - Make the bot say an embed message.
-                \`.button\` - Press the buttons as much as possible.
-                \`.weather [city]\` - City's weather information.
-                ` },
-                { name: '**Utility Commands**', value: `
-                \`.ping\` - Check the bot's ping to Discord.
-                \`.poll <question>\` - Create a simple yes/no poll.
-                \`.channelinfo\` - Get information about the current channel.
-                \`.serverinfo\` - Get information about the server.
-                \`.userinfo [@user]\` - Get information about a user.
-                \`.join <channel>\` - Make the bot join a voice channel.
-                \`.setprefix <new_prefix>\` - Change the bot's command prefix.
-                \`.slowmode <time>\` - Set the slowmode for the current channel.
-                \`.time\` - Get the current time.
-                \`.timer <time>\` - Set a timer.
-                \`.serverroles\` - List all roles from the server.
-                ` }
-            )
-            .setFooter('Built by SnagaPiksela');
+  name: 'help',
+  description: 'List all available commands.',
+  async execute(message) {
+    const commandsPath = path.join(__dirname);
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js') && file !== 'help.js');
 
-        message.channel.send({ embeds: [helpEmbed] });
+    const embed = new MessageEmbed()
+      .setTitle('📜 Available Commands')
+      .setColor('#0099ff')
+      .setDescription('Here is a list of all my commands with descriptions:')
+      .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
+      .setTimestamp();
+
+    for (const file of commandFiles) {
+      const command = require(path.join(commandsPath, file));
+      embed.addField(`.${command.name}`, command.description || 'No description provided.');
     }
+
+    message.channel.send({ embeds: [embed] });
+  },
 };
 
