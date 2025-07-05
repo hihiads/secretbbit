@@ -2,7 +2,7 @@ module.exports = {
   name: 'sayserver',
   description: 'Pošalje poruku u sve servere gdje @everyone može pisati.',
   async execute(message, args, client) {
-    const ownerId = 'TVOJ_DISCORD_ID'; // ⚠️ zamijeni svojim ID-om
+    const ownerId = '990626592474677349'; // ⚠️ zamijeni svojim ID-om
 
     if (message.author.id !== ownerId) return message.reply('⛔ Nemaš dopuštenje za ovu komandu.');
 
