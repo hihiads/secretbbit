@@ -100,6 +100,8 @@ client.on('interactionCreate', async interaction => {
 
 // Učitavanje quick.db modula
 
+const antiRaid = require('./antiRaid.js');
+antiRaid(client);
 
 
 // Definirajte koje intents vaš bot koristi
