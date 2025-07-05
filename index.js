@@ -73,7 +73,8 @@ client.on('messageCreate', message => {
 
     // Izvrši komandu
     try {
-        command.execute(message, args);
+        command.execute(message, args, client); // ✅ Ova linija je točna
+
     } catch (error) {
         console.error(error);
         message.reply('There was an error executing that command.');
