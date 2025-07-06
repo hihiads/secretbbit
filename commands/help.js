@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-  name: 'help',
+  name: 'helpall',
   description: 'List all available commands.',
   async execute(message) {
     const commandsPath = path.join(__dirname);
