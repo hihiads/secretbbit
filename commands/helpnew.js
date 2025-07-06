@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
   name: 'help',
   description: 'List all available commands with descriptions, sorted by category.',
-  aliases: ['h'], // 👈 Dodali smo alias ovdje
+  aliases: ['h'],
   async execute(message) {
     const moderationCommands = `
 \`.antiraid\` — Lock or unlock all channels to prevent raids.
@@ -38,7 +38,8 @@ module.exports = {
 \`.rps\` — Play rock paper scissors against the bot.
 `;
 
-    const utilityCommands = `
+    // Dijelimo utilityCommands na dva dijela
+    const utilityCommandsPart1 = `
 \`.avatar\` — Displays the avatar of a user or the server.
 \`.channelinfo\` — Displays information about the current channel.
 \`.color\` — Displays the color of given hex code.
@@ -50,6 +51,9 @@ module.exports = {
 \`.say\` — Repeat a message.
 \`.sayserver\` — Send a message to all servers where @everyone can write.
 \`.serverinfo\` — Displays information about the server.
+`;
+
+    const utilityCommandsPart2 = `
 \`.serverinvite\` — Generates an invite link to the server.
 \`.serverroles\` — Lists all roles on the server.
 \`.setprefix\` — Changes the bot prefix for this server.
@@ -73,7 +77,8 @@ module.exports = {
       .setDescription('Here is a list of all my commands, organized by category:')
       .addField('🛡️ Moderation', moderationCommands)
       .addField('🎉 Fun', funCommands)
-      .addField('💡 Utility', utilityCommands)
+      .addField('💡 Utility (1/2)', utilityCommandsPart1)
+      .addField('💡 Utility (2/2)', utilityCommandsPart2)
       .addField('🌐 General', generalCommands)
       .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp();
